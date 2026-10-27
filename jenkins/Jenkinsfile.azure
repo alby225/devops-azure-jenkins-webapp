@@ -1,0 +1,92 @@
+pipeline {
+    agent any
+
+    environment {
+        AZURE_SUBSCRIPTION_ID = credentials('azure-subscription-id')
+        AZURE_TENANT_ID       = credentials('azure-tenant-id')
+        AZURE_CLIENT_ID       = credentials('azure-client-id')
+        AZURE_CLIENT_SECRET   = credentials('azure-client-secret')
+        SSH_KEY_CREDENTIAL    = 'azure-vm-ssh-key'
+        APP_DIR               = 'app'
+        TF_DIR                = 'terraform/azure'
+    }
+
+    stages {
+        stage('1. Checkout Code') {
+            steps {
+                echo '=== [STAGE 1] Checking out source code from GitHub Repository ==='
+                checkout scm
+            }
+        }
+
+        stage('2. Build & Unit Test') {
+            steps {
+                echo '=== [STAGE 2] Building Web Application & Executing Tests ==='
+                dir("${env.APP_DIR}") {
+                    sh 'npm install --no-audit --no-fund'
+                    sh 'npm test'
+                }
+            }
+        }
+
+        stage('3. Terraform Provisioning (Azure)') {
+            steps {
+                echo '=== [STAGE 3] Initializing and Provisioning Azure Infrastructure via Terraform ==='
+                dir("${env.TF_DIR}") {
+                    sh 'terraform init'
+                    sh 'terraform plan -out=tfplan'
+                    sh 'terraform apply -auto-approve tfplan'
+                    script {
+                        env.VM_PUBLIC_IP = sh(
+                            script: 'terraform output -raw public_ip_address',
+                            returnStdout: true
+                        ).trim()
+                        echo "Azure Virtual Machine Public IP: ${env.VM_PUBLIC_IP}"
+                    }
+                }
+            }
+        }
+
+        stage('4. Deploy to Azure VM') {
+            steps {
+                echo "=== [STAGE 4] Deploying Application to Azure VM (${env.VM_PUBLIC_IP}) ==="
+                sshagent([env.SSH_KEY_CREDENTIAL]) {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no azureuser@${env.VM_PUBLIC_IP} "mkdir -p ~/web-app"
+                        scp -o StrictHostKeyChecking=no -r app/* azureuser@${env.VM_PUBLIC_IP}:~/web-app/
+                        ssh -o StrictHostKeyChecking=no azureuser@${env.VM_PUBLIC_IP} "
+                            cd ~/web-app
+                            npm install --production
+                            pm2 delete devops-app || true
+                            BUILD_NUMBER=${env.BUILD_NUMBER} GIT_COMMIT=${env.GIT_COMMIT} CLOUD_PROVIDER='Microsoft Azure (East US)' pm2 start server.js --name devops-app
+                            pm2 save
+                        "
+                    """
+                }
+            }
+        }
+
+        stage('5. Smoke Test & Health Check') {
+            steps {
+                echo '=== [STAGE 5] Verifying Deployment Health Check ==='
+                sh """
+                    sleep 10
+                    curl -f http://${env.VM_PUBLIC_IP}:3000/api/health || exit 1
+                    echo "Application is verified UP and running on Azure!"
+                """
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline execution complete.'
+        }
+        success {
+            echo "SUCCESS: Deployed successfully to Azure! Live at http://${env.VM_PUBLIC_IP}:3000"
+        }
+        failure {
+            echo 'FAILURE: Pipeline execution encountered an error.'
+        }
+    }
+}

@@ -1,0 +1,103 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME     = 'devops-azure-jenkins-webapp'
+        PORT         = '3000'
+        CLOUD_TARGET = 'Microsoft Azure (Simulated Production Host)'
+    }
+
+    stages {
+        stage('1. Checkout SCM') {
+            steps {
+                echo '=== [STAGE 1] Checking out source code from Git ==='
+                checkout scm
+            }
+        }
+
+        stage('2. Code Quality & Unit Tests') {
+            steps {
+                echo '=== [STAGE 2] Installing Dependencies & Running Automated Unit Tests ==='
+                dir('app') {
+                    // Compatible with both Windows (bat/powershell) and Linux (sh)
+                    script {
+                        if (isUnix()) {
+                            sh 'npm install --no-audit --no-fund'
+                            sh 'node test/app.test.js'
+                        } else {
+                            bat 'npm install --no-audit --no-fund'
+                            bat 'node test/app.test.js'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('3. Terraform IaC Validation') {
+            steps {
+                echo '=== [STAGE 3] Validating Terraform Azure Infrastructure Configuration ==='
+                dir('terraform/azure') {
+                    script {
+                        if (isUnix()) {
+                            sh 'terraform init -backend=false'
+                            sh 'terraform validate'
+                        } else {
+                            bat 'terraform init -backend=false'
+                            bat 'terraform validate'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('4. Continuous Deployment') {
+            steps {
+                echo '=== [STAGE 4] Deploying Web Application to Target Host ==='
+                script {
+                    if (isUnix()) {
+                        sh '''
+                            mkdir -p /tmp/devops-deployed-app
+                            cp -r app/* /tmp/devops-deployed-app/
+                            cd /tmp/devops-deployed-app
+                            # Start in background if not running
+                            pkill -f "node server.js" || true
+                            BUILD_NUMBER=${BUILD_NUMBER} GIT_COMMIT=${GIT_COMMIT} CLOUD_PROVIDER="${CLOUD_TARGET}" node server.js > app.log 2>&1 &
+                        '''
+                    } else {
+                        bat """
+                            taskkill /F /IM node.exe /FI "WINDOWTITLE eq DevOps-App*" 2>nul || exit 0
+                            start "DevOps-App" cmd /c "cd app && set PORT=3000 && set CLOUD_PROVIDER=Microsoft Azure VM && set BUILD_NUMBER=Build-#${BUILD_NUMBER} && node server.js"
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('5. Smoke Test & Health Check') {
+            steps {
+                echo '=== [STAGE 5] Performing Post-Deployment Health Verification ==='
+                script {
+                    sleep(time: 5, unit: 'SECONDS')
+                    if (isUnix()) {
+                        sh 'curl -f http://localhost:3000/api/health || exit 1'
+                    } else {
+                        bat 'powershell -Command "Invoke-RestMethod -Uri http://localhost:3000/api/health"'
+                    }
+                }
+                echo 'Application is verified HEALTHY and responding with HTTP 200 OK.'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "=========================================================="
+            echo "CI/CD PIPELINE SUCCEEDED!"
+            echo "Web Application is LIVE and healthy on http://localhost:3000"
+            echo "=========================================================="
+        }
+        failure {
+            echo "CI/CD PIPELINE FAILED. Please check build logs."
+        }
+    }
+}

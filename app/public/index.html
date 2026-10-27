@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevOps Automated Web App | Azure & Jenkins CI/CD</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-area">
+        <div class="status-indicator online"></div>
+        <div class="title-group">
+          <h1>DevOps Cloud Deployment Portal</h1>
+          <p class="subtitle">Automated CI/CD Pipeline via Jenkins, Terraform & Microsoft Azure</p>
+        </div>
+      </div>
+      <div class="badge-group">
+        <span class="badge badge-azure">Azure Cloud</span>
+        <span class="badge badge-terraform">Terraform IaC</span>
+        <span class="badge badge-jenkins">Jenkins CI/CD</span>
+      </div>
+    </header>
+
+    <!-- Hero Card -->
+    <section class="card hero-card">
+      <div class="hero-content">
+        <h2>Production Deployment Status: <span class="status-success">ACTIVE & HEALTHY</span></h2>
+        <p>This web application was continuously integrated and provisioned automatically using an end-to-end DevOps workflow.</p>
+      </div>
+      <div class="pipeline-flow">
+        <div class="node">
+          <div class="node-icon">🐙</div>
+          <span>GitHub</span>
+          <small>Version Control</small>
+        </div>
+        <div class="arrow">➜</div>
+        <div class="node">
+          <div class="node-icon">🛠️</div>
+          <span>Jenkins</span>
+          <small>CI/CD Build & Test</small>
+        </div>
+        <div class="arrow">➜</div>
+        <div class="node">
+          <div class="node-icon">📜</div>
+          <span>Terraform</span>
+          <small>IaC Provisioning</small>
+        </div>
+        <div class="arrow">➜</div>
+        <div class="node">
+          <div class="node-icon">☁️</div>
+          <span>Azure VM</span>
+          <small>Ubuntu Host</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grid: Metrics & Metadata -->
+    <section class="grid-2">
+      <!-- Deployment Details -->
+      <div class="card">
+        <h3>Deployment Telemetry</h3>
+        <table class="data-table">
+          <tbody>
+            <tr>
+              <td>Target Cloud Host:</td>
+              <td id="dep-provider" class="highlight">Microsoft Azure Virtual Machine</td>
+            </tr>
+            <tr>
+              <td>Target Region:</td>
+              <td id="dep-region">East US (azure-eastus)</td>
+            </tr>
+            <tr>
+              <td>VM Size Specification:</td>
+              <td id="dep-vmsize">Standard_B1s (1 vCPU, 1 GB RAM)</td>
+            </tr>
+            <tr>
+              <td>CI/CD Automation:</td>
+              <td id="dep-ci">Jenkins Declarative Pipeline</td>
+            </tr>
+            <tr>
+              <td>Infrastructure as Code:</td>
+              <td id="dep-iac">HashiCorp Terraform v1.16+</td>
+            </tr>
+            <tr>
+              <td>Build Execution ID:</td>
+              <td id="dep-build">#1 (Automated)</td>
+            </tr>
+            <tr>
+              <td>Git Commit:</td>
+              <td id="dep-commit"><code>latest-main</code></td>
+            </tr>
+            <tr>
+              <td>Deployed Timestamp:</td>
+              <td id="dep-timestamp">Just now</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Host Runtime Metrics -->
+      <div class="card">
+        <h3>Host Runtime Metrics</h3>
+        <table class="data-table">
+          <tbody>
+            <tr>
+              <td>Host Server Platform:</td>
+              <td id="sys-platform">Loading...</td>
+            </tr>
+            <tr>
+              <td>Host Virtual Name:</td>
+              <td id="sys-hostname">Loading...</td>
+            </tr>
+            <tr>
+              <td>Allocated CPU Cores:</td>
+              <td id="sys-cpu">Loading...</td>
+            </tr>
+            <tr>
+              <td>Free Memory:</td>
+              <td id="sys-freemem">Loading...</td>
+            </tr>
+            <tr>
+              <td>Total System Memory:</td>
+              <td id="sys-totalmem">Loading...</td>
+            </tr>
+            <tr>
+              <td>Node.js Environment:</td>
+              <td id="sys-uptime">Loading...</td>
+            </tr>
+            <tr>
+              <td>Health Check Status:</td>
+              <td><span class="badge badge-success" id="sys-status">UP (200 OK)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Live API Tester -->
+    <section class="card api-card">
+      <div class="api-header">
+        <h3>Live API Endpoint Inspector</h3>
+        <div class="api-buttons">
+          <button class="btn btn-primary" onclick="fetchHealth()">Query /api/health</button>
+          <button class="btn btn-secondary" onclick="fetchInfo()">Query /api/info</button>
+        </div>
+      </div>
+      <pre id="api-output" class="code-output">// Click a button above to inspect real-time JSON response from backend API</pre>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>DevOps 3rd IA Project | Automated Deployment of Web Application using CI/CD, Terraform, Azure, and Jenkins</p>
+      <p class="subfooter">Academic Project Submission | Cloud & DevOps Automation Lab</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

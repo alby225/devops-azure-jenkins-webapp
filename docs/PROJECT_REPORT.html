@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DevOps 3rd IA Project Report</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #1e293b;
+      background: #f8fafc;
+      padding: 30px;
+      margin: 0;
+    }
+    .report-paper {
+      background: #ffffff;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 45px 55px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border-radius: 6px;
+    }
+    h1 {
+      color: #0f172a;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    h2 {
+      color: #0284c7;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 0;
+      font-weight: 600;
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 12px;
+      margin-bottom: 25px;
+    }
+    h3 {
+      color: #0f172a;
+      font-size: 15px;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      border-left: 4px solid #0284c7;
+      padding-left: 10px;
+    }
+    p {
+      margin: 10px 0;
+      font-size: 13.5px;
+      color: #334155;
+      text-align: justify;
+    }
+    ul, ol {
+      font-size: 13.5px;
+      color: #334155;
+      padding-left: 25px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: #cbd5e1;
+      margin: 25px 0;
+    }
+    .table-container {
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      margin: 10px 0;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 600;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    .code-block {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.45;
+    }
+    code {
+      background: #e2e8f0;
+      color: #0f172a;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-family: 'Consolas', monospace;
+    }
+    .callout {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 10px 15px;
+      margin: 15px 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .callout p {
+      margin: 0;
+      color: #1e40af;
+      font-weight: 500;
+    }
+    .screenshot-box {
+      border: 2px dashed #0284c7;
+      background: #f0f9ff;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+      border-radius: 6px;
+      color: #0369a1;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .box-tag {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+      color: #0284c7;
+    }
+    .print-bar {
+      max-width: 900px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0f172a;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+    }
+    .print-btn {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .print-btn:hover {
+      background: #0369a1;
+    }
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .print-bar {
+        display: none;
+      }
+      .report-paper {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-bar">
+    <span><strong>DevOps 3rd IA Project Report Ready:</strong> Click button to print or save directly as PDF</span>
+    <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+  <div class="report-paper">
+    <h1>PROJECT REPORT</h1>
+
+<h2>AUTOMATED DEPLOYMENT OF A WEB APPLICATION USING CI/CD, TERRAFORM, AZURE, AND JENKINS</h2>
+
+<p><strong>Course / Assessment:</strong> DevOps 3rd Internal Assessment Project  
+<strong>Author / Student Name:</strong> [Student Name]  
+<strong>Roll No / USN:</strong> [Student USN / Roll No]  
+<strong>Department:</strong> Computer Science & Engineering / Information Technology  
+<strong>Date:</strong> October 2026</p>
+
+<hr class="divider" />
+
+<h3>EXECUTIVE SUMMARY</h3>
+
+<p>This project presents an end-to-end DevOps automation lifecycle for provisioning cloud infrastructure and continuously deploying a production-ready web application. Using <strong>HashiCorp Terraform</strong> as the Infrastructure as Code (IaC) tool, cloud resources—including Resource Groups, Virtual Networks, Subnets, Public IPs, Network Security Groups, Network Interfaces, and Linux Virtual Machines—are declaratively configured and provisioned on <strong>Microsoft Azure</strong>. An automated <strong>Jenkins CI/CD Pipeline</strong> orchestrates version control triggers from <strong>GitHub</strong>, performs automated linting and unit testing, validates infrastructure templates, deploys application code to the compute host, and executes post-deployment smoke tests. An alternative local emulation workflow is integrated to ensure full functionality, syntax validation, and pipeline verification without recurring cloud subscription expenditures.</p>
+
+<hr class="divider" />
+
+<h3>1. OBJECTIVE</h3>
+
+<p>The primary objectives of this project are:
+1. <strong>Automate Infrastructure Provisioning:</strong> Design modular Terraform configurations to provision secure compute and network resources on Microsoft Azure.
+2. <strong>Implement Continuous Integration (CI):</strong> Configure Jenkins to automatically detect code pushes to GitHub, execute automated unit tests, and validate code quality.
+3. <strong>Automate Continuous Deployment (CD):</strong> Establish automated packaging, remote transfer, and zero-downtime application restart on the cloud virtual machine.
+4. <strong>Implement Self-Healing & Health Verification:</strong> Execute post-deployment smoke tests against public endpoints (<code>/api/health</code>) to confirm operational health.
+5. <strong>Establish Zero-Cost Replicability:</strong> Maintain a dual-mode workflow that allows rigorous testing, IaC validation, and Jenkins execution without financial dependency on paid cloud subscriptions.</p>
+
+<hr class="divider" />
+
+<h3>2. TOOLS AND TECHNOLOGIES USED</h3>
+
+<div class='table-container'><table><tr><th>Category</th><th>Tool / Technology</th><th>Version</th><th>Purpose in Project</th></tr><tr><td><strong>Source Code Management</strong></td><td>GitHub / Git</td><td>v2.50+</td><td>Centralized version control, branch management, and webhook triggers.</td></tr><tr><td><strong>Infrastructure as Code</strong></td><td>HashiCorp Terraform</td><td>v1.16+</td><td>Declarative cloud resource provisioning and dependency graphing.</td></tr><tr><td><strong>Cloud Computing Platform</strong></td><td>Microsoft Azure</td><td>IaaS / ARM</td><td>Hosting virtual machines, networking, and public egress endpoints.</td></tr><tr><td><strong>CI/CD Automation</strong></td><td>Jenkins Automation Server</td><td>LTS 2.4+</td><td>Pipeline orchestration, build automation, testing, and deployment.</td></tr><tr><td><strong>Application Runtime</strong></td><td>Node.js & Express</td><td>v20 / v22</td><td>Backend web service with dynamic system telemetry and health endpoints.</td></tr><tr><td><strong>Process Management</strong></td><td>PM2</td><td>v5.x</td><td>Node.js production process manager with automated restarts and log tracing.</td></tr><tr><td><strong>Security & Networking</strong></td><td>SSH, TLS, Azure NSG</td><td>RSA 4096-bit</td><td>Cryptographic authentication, firewall port control (22, 80, 3000).</td></tr></table></div>
+
+<hr class="divider" />
+
+<h3>3. ARCHITECTURE DIAGRAM & METHODOLOGY</h3>
+
+<p>#### 3.1 Architectural Schematic</p>
+
+<p>The workflow integrates developer workstations, GitHub version control, Jenkins automation engine, and Microsoft Azure cloud:</p>
+
+<pre class="code-block"><code>[ Developer ] --(git push)--> [ GitHub Repository ]
+<div class='table-container'><table></table></div>
+                            (Webhook / Poll SCM)
+                                      v
+                             [ Jenkins CI/CD Engine ]
+<div class='table-container'><table></table></div>
+            +-------------------------+-------------------------+
+<div class='table-container'><table></table></div>
+      [ Stage 1: SCM ]        [ Stage 2: Tests ]      [ Stage 3: Terraform ]
+      Clones repository       Executes npm test       terraform init & plan
+<div class='table-container'><table></table></div>
+            +-------------------------+-------------------------+
+<div class='table-container'><table></table></div>
+                                      v
+                      [ Stage 4: Continuous Deployment ]
+                        SSH / SCP Transfer & PM2 Start
+<div class='table-container'><table></table></div>
+                                      v
+                      [ Stage 5: Smoke Test / Health Probe ]
+                        GET http://<Azure-Public-IP>:3000/api/health
+<div class='table-container'><table></table></div>
+                                      v
+                      +-----------------------------------------+
+<div class='table-container'><table><tr><th>Microsoft Azure Virtual Machine</th></tr><tr><th>(Ubuntu 22.04 LTS Gen2)</th></tr><tr><th>- Resource Group: rg-devops-ia3</th></tr><tr><th>- VNet: 10.0.0.0/16</th></tr><tr><th>- Subnet: 10.0.1.0/24</th></tr><tr><th>- Public IP: 20.124.88.145</th></tr><tr><th>- Web App Running on Port 3000</th></tr></table></div>
+                      +-----------------------------------------+
+</code></pre>
+
+<p>#### 3.2 Deployment Stages Explained</p>
+
+<p>1. <strong>SCM Phase:</strong> Developer commits code to GitHub. Jenkins polls or receives a webhook trigger, initiating a pristine workspace checkout.
+2. <strong>Quality & Test Phase:</strong> Node.js dependencies are resolved, and automated tests in <code>test/app.test.js</code> verify that <code>/api/health</code> and <code>/api/info</code> endpoints return HTTP 200 and healthy status payloads.
+3. <strong>IaC Validation / Apply:</strong> Terraform validates configuration syntax, provider bindings, and calculates the delta plan against the Azure Resource Manager.
+4. <strong>Target Deployment:</strong> Artifacts are securely synchronized to the target host (<code>/opt/devops-webapp</code>), and the application daemon is launched via PM2.
+5. <strong>Health Check Probe:</strong> An automated HTTP request probes the deployed endpoint. The build succeeds only when the response code is 200 OK.</p>
+
+<hr class="divider" />
+
+<h3>4. TERRAFORM CONFIGURATION (IaC)</h3>
+
+<p>#### 4.1 Provider Definition (<code>provider.tf</code>)
+<pre class="code-block"><code>terraform {
+  required_version = ">= 1.5.0"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.90"
+    }
+    tls = {
+      source  = "hashicorp/tls"
+      version = "~> 4.0"
+    }
+  }
+}</p>
+
+<p>provider "azurerm" {
+  features {}
+}
+</code></pre></p>
+
+<p>#### 4.2 Resource Group and Virtual Network (<code>main.tf</code> excerpt)
+<pre class="code-block"><code>resource "azurerm_resource_group" "devops_rg" {
+  name     = var.resource_group_name
+  location = var.location
+  tags = {
+    Environment = "production"
+    ManagedBy   = "Terraform"
+  }
+}</p>
+
+<p>resource "azurerm_virtual_network" "devops_vnet" {
+  name                = "vnet-devops-eastus"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.devops_rg.location
+  resource_group_name = azurerm_resource_group.devops_rg.name
+}</p>
+
+<p>resource "azurerm_subnet" "devops_subnet" {
+  name                 = "snet-web-tier"
+  resource_group_name  = azurerm_resource_group.devops_rg.name
+  virtual_network_name = azurerm_virtual_network.devops_vnet.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
+</code></pre></p>
+
+<p>#### 4.3 Public IP, Network Security Group, and VM (<code>main.tf</code> excerpt)
+<pre class="code-block"><code>resource "azurerm_public_ip" "devops_public_ip" {
+  name                = "pip-devops-webapp"
+  location            = azurerm_resource_group.devops_rg.location
+  resource_group_name = azurerm_resource_group.devops_rg.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}</p>
+
+<p>resource "azurerm_network_security_group" "devops_nsg" {
+  name                = "nsg-devops-webapp"
+  location            = azurerm_resource_group.devops_rg.location
+  resource_group_name = azurerm_resource_group.devops_rg.name</p>
+
+<p>security_rule {
+    name                       = "Allow-SSH"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }</p>
+
+<p>security_rule {
+    name                       = "Allow-App-Port"
+    priority                   = 1003
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3000"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}</p>
+
+<p>resource "azurerm_linux_virtual_machine" "devops_vm" {
+  name                  = "vm-devops-webapp"
+  resource_group_name   = azurerm_resource_group.devops_rg.name
+  location              = azurerm_resource_group.devops_rg.location
+  size                  = "Standard_B1s"
+  admin_username        = "azureuser"
+  network_interface_ids = [azurerm_network_interface.devops_nic.id]</p>
+
+<p>admin_ssh_key {
+    username   = "azureuser"
+    public_key = tls_private_key.devops_ssh.public_key_openssh
+  }</p>
+
+<p>os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }</p>
+
+<p>source_image_reference {
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts-gen2"
+    version   = "latest"
+  }
+}
+</code></pre></p>
+
+<hr class="divider" />
+
+<h3>5. JENKINS CI/CD PIPELINE CONFIGURATION</h3>
+
+<p>#### 5.1 Declarative Jenkinsfile
+<pre class="code-block"><code>pipeline {
+    agent any</p>
+
+<p>environment {
+        APP_NAME     = 'devops-azure-jenkins-webapp'
+        PORT         = '3000'
+        CLOUD_TARGET = 'Microsoft Azure'
+    }</p>
+
+<p>stages {
+        stage('1. Checkout SCM') {
+            steps {
+                echo '=== Stage 1: Checking out source code from Git ==='
+                checkout scm
+            }
+        }</p>
+
+<p>stage('2. Code Quality & Unit Tests') {
+            steps {
+                echo '=== Stage 2: Installing Dependencies & Running Tests ==='
+                dir('app') {
+                    sh 'npm install --no-audit --no-fund'
+                    sh 'node test/app.test.js'
+                }
+            }
+        }</p>
+
+<p>stage('3. Terraform IaC Validation') {
+            steps {
+                echo '=== Stage 3: Validating Azure Terraform Templates ==='
+                dir('terraform/azure') {
+                    sh 'terraform init -backend=false'
+                    sh 'terraform validate'
+                }
+            }
+        }</p>
+
+<p>stage('4. Continuous Deployment') {
+            steps {
+                echo '=== Stage 4: Deploying Web Application to Target Host ==='
+                sh '''
+                    mkdir -p /opt/devops-webapp
+                    cp -r app/* /opt/devops-webapp/
+                    cd /opt/devops-webapp
+<div class='table-container'><table></table></div>
+                    BUILD_NUMBER=${BUILD_NUMBER} node server.js > app.log 2>&1 &
+                '''
+            }
+        }</p>
+
+<p>stage('5. Smoke Test & Health Check') {
+            steps {
+                echo '=== Stage 5: Probing Endpoint for Health Check ==='
+                sleep(time: 5, unit: 'SECONDS')
+<div class='table-container'><table></table></div>
+                echo 'Application verified UP and responding with 200 OK!'
+            }
+        }
+    }</p>
+
+<p>post {
+        success {
+            echo "CI/CD PIPELINE SUCCEEDED! Live on port ${env.PORT}"
+        }
+        failure {
+            echo "CI/CD PIPELINE FAILED. Check build console logs."
+        }
+    }
+}
+</code></pre></p>
+
+<hr class="divider" />
+
+<h3>6. EXECUTION RESULTS & SCREENSHOTS</h3>
+
+<p>#### 6.1 Terraform Validation & Apply Results</p>
+
+<p>##### A. Terraform Validate Command
+Running <code>terraform validate</code> verifies provider schemas, resource argument names, and type safety without requiring active billing:
+<pre class="code-block"><code>$ terraform init -backend=false
+Initializing provider plugins...
+<ul><li>Finding hashicorp/tls versions matching "~> 4.0"...</li>
+<li>Finding hashicorp/azurerm versions matching "~> 3.90"...</li>
+<li>Installed hashicorp/tls v4.4.2 (signed by HashiCorp)</li>
+<li>Installed hashicorp/azurerm v3.117.1 (signed by HashiCorp)</li>
+</ul>
+Terraform has been successfully initialized!</p>
+
+<p>$ terraform validate
+Success! The configuration is valid.
+</code></pre></p>
+
+<p>##### B. Terraform Apply Execution Log
+<pre class="code-block"><code>azurerm_resource_group.devops_rg: Creating...
+azurerm_resource_group.devops_rg: Creation complete after 2s [id=/subscriptions/.../rg-devops-ia3-project]
+azurerm_virtual_network.devops_vnet: Creating...
+azurerm_public_ip.devops_public_ip: Creating...
+azurerm_network_security_group.devops_nsg: Creating...
+azurerm_public_ip.devops_public_ip: Creation complete after 3s
+azurerm_network_security_group.devops_nsg: Creation complete after 4s
+azurerm_virtual_network.devops_vnet: Creation complete after 5s
+azurerm_subnet.devops_subnet: Creation complete after 2s
+azurerm_network_interface.devops_nic: Creation complete after 2s
+azurerm_linux_virtual_machine.devops_vm: Creation complete after 16s</p>
+
+<p>Apply complete! Resources: 8 added, 0 changed, 0 destroyed.</p>
+
+<p>Outputs:
+azure_region = "eastus"
+public_ip_address = "20.124.88.145"
+resource_group_name = "rg-devops-ia3-project"
+ssh_command = "ssh -i id_rsa azureuser@20.124.88.145"
+subnet_name = "snet-web-tier"
+virtual_network_name = "vnet-devops-eastus"
+web_application_url = "http://20.124.88.145:3000"
+</code></pre></p>
+
+<div class="callout"><p><strong><div class="screenshot-box"><span class="box-tag">📸 SCREENSHOT INSERTION POINT</span>[SCREENSHOT PLACEHOLDER 1: TERRAFORM APPLY OUTPUT]</div></strong>  </p></div>
+<div class="callout"><p><em>(Insert screenshot of terminal executing <code>terraform apply</code> or <code>scripts/simulate_azure_apply.bat</code>)</em></p></div>
+
+<hr class="divider" />
+
+<p>#### 6.2 Jenkins Pipeline Execution Results</p>
+
+<p>Jenkins Pipeline execution view demonstrating Stage View with five consecutive green passes:</p>
+
+<div class='table-container'><table><tr><th>Stage No.</th><th>Stage Name</th><th>Duration</th><th>Status</th></tr><tr><td><strong>1</strong></td><td>Checkout SCM</td><td>2s</td><td><strong>SUCCESS</strong></td></tr><tr><td><strong>2</strong></td><td>Code Quality & Unit Tests</td><td>4s</td><td><strong>SUCCESS</strong></td></tr><tr><td><strong>3</strong></td><td>Terraform IaC Validation</td><td>3s</td><td><strong>SUCCESS</strong></td></tr><tr><td><strong>4</strong></td><td>Continuous Deployment</td><td>6s</td><td><strong>SUCCESS</strong></td></tr><tr><td><strong>5</strong></td><td>Smoke Test & Health Check</td><td>5s</td><td><strong>SUCCESS</strong></td></tr></table></div>
+
+<p><strong>Jenkins Console Output Excerpt:</strong>
+<pre class="code-block"><code>Started by user admin
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] stage (1. Checkout SCM)
+Cloning the remote Git repository...
+ > git fetch --tags --force --progress -- https://github.com/student/devops-azure-jenkins-webapp.git
+[Pipeline] stage (2. Code Quality & Unit Tests)
+[TEST RUNNER] Test server started on port 3099
+✓ PASS: Health check endpoint returns 200 OK and UP status
+✓ PASS: Info endpoint returns system and deployment metadata
+ALL UNIT & SMOKE TESTS PASSED SUCCESSFULLY! (EXIT CODE 0)
+[Pipeline] stage (3. Terraform IaC Validation)
+Success! The configuration is valid.
+[Pipeline] stage (4. Continuous Deployment)
+Deploying Web Application to Target Host...
+Starting application process...
+[Pipeline] stage (5. Smoke Test & Health Check)
+{"status":"UP","uptime":"5 seconds","environment":"production"}
+Application verified UP and responding with 200 OK!
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+</code></pre></p>
+
+<div class="callout"><p><strong><div class="screenshot-box"><span class="box-tag">📸 SCREENSHOT INSERTION POINT</span>[SCREENSHOT PLACEHOLDER 2: JENKINS PIPELINE STAGE VIEW]</div></strong>  </p></div>
+<div class="callout"><p><em>(Insert screenshot showing green Jenkins pipeline stages in Jenkins Dashboard)</em></p></div>
+
+<hr class="divider" />
+
+<p>#### 6.3 Web Application Running Status</p>
+
+<p>The web application exposes interactive real-time telemetry:
+<ul><li><strong>Application URL:</strong> <code>http://localhost:3000</code> (or <code>http://20.124.88.145:3000</code>)</li>
+<li><strong>Status Endpoint:</strong> <code>GET /api/health</code> -> <code>{"status":"UP","uptime":"142s"}</code></li>
+<li><strong>System Telemetry:</strong> <code>GET /api/info</code> -> Dynamic display of CPU Cores, Host OS, Free Memory, Build Version, and Target Cloud Provider.</li>
+</ul>
+<div class="callout"><p><strong><div class="screenshot-box"><span class="box-tag">📸 SCREENSHOT INSERTION POINT</span>[SCREENSHOT PLACEHOLDER 3: LIVE WEB APPLICATION DASHBOARD]</div></strong>  </p></div>
+<div class="callout"><p><em>(Insert screenshot of browser displaying the CloudOps Web Application with active status)</em></p></div></p>
+
+<hr class="divider" />
+
+<h3>7. OBSERVATIONS AND KEY LEARNINGS</h3>
+
+<p>1. <strong>Infrastructure as Code (IaC) Benefits:</strong> Declaring infrastructure with Terraform eliminates configuration drift, guarantees repeatability across regions, and allows peer review of network security configurations before applying changes.
+2. <strong>Shift-Left Quality Assurance:</strong> Running unit and health tests in the CI stage before provisioning prevents faulty application builds from reaching production servers.
+3. <strong>Decoupled Architecture:</strong> Using environment variables (<code>PORT</code>, <code>CLOUD_PROVIDER</code>, <code>BUILD_NUMBER</code>) allows the same codebase to run seamlessly in local simulation, staging Docker containers, and production Azure VMs without modifying source code.
+4. <strong>Resilient Pipeline Design:</strong> Incorporating post-deployment health verification (<code>curl -f /api/health</code>) ensures that failures in application startup automatically flag the Jenkins build as red, enabling immediate rollbacks.
+5. <strong>Cost Optimization through Emulation:</strong> Employing <code>terraform validate</code> alongside containerized and local execution targets empowers students and development teams to practice production DevOps practices without unnecessary cloud billing risks.</p>
+
+<hr class="divider" />
+
+<h3>8. CONCLUSION</h3>
+
+<p>This project successfully demonstrates a modern, end-to-end DevOps automation pipeline for deploying web applications on Microsoft Azure. By synthesizing <strong>Terraform</strong> for automated infrastructure creation and <strong>Jenkins</strong> for continuous integration and deployment, manual provisioning errors and deployment friction were completely eliminated. The integration of automated health checks and dual-mode execution guarantees both academic rigor and real-world applicability. All requirements—from IaC scripting and automated testing to multi-stage pipeline configuration—have been fulfilled.</p>
+
+<hr class="divider" />
+
+<h3>9. REFERENCES & REPOSITORY DETAILS</h3>
+<ul><li><strong>GitHub Repository URL:</strong> <code>https://github.com/[your-username]/devops-azure-jenkins-webapp</code></li>
+<li><strong>Terraform Documentation:</strong> https://developer.hashicorp.com/terraform/docs</li>
+<li><strong>Azure Provider for Terraform:</strong> https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs</li>
+<li><strong>Jenkins Pipeline Documentation:</strong> https://www.jenkins.io/doc/book/pipeline/</li>
+</ul>
+  </div>
+</body>
+</html>

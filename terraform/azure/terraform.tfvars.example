@@ -1,0 +1,7 @@
+# Example configuration for production Azure environment
+resource_group_name = "rg-devops-ia3-project"
+location            = "eastus"
+vm_name             = "vm-devops-webapp"
+vm_size             = "Standard_B1s"
+admin_username      = "azureuser"
+environment         = "production"
