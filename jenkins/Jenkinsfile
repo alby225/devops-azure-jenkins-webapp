@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    triggers {
+        // Automatically check GitHub every 5 minutes and redeploy on code commit
+        pollSCM('H/5 * * * *')
+    }
+
     environment {
         APP_NAME     = 'devops-azure-jenkins-webapp'
         PORT         = '3000'

@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    triggers {
+        // Automatically check GitHub every 5 minutes and redeploy on code commit
+        pollSCM('H/5 * * * *')
+    }
+
     environment {
         AZURE_SUBSCRIPTION_ID = credentials('azure-subscription-id')
         AZURE_TENANT_ID       = credentials('azure-tenant-id')
