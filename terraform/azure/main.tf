@@ -120,6 +120,13 @@ resource "tls_private_key" "devops_ssh" {
   rsa_bits  = 4096
 }
 
+# Save generated private key locally so student can SSH into VM directly
+resource "local_file" "ssh_key" {
+  content         = tls_private_key.devops_ssh.private_key_pem
+  filename        = "${path.module}/id_rsa"
+  file_permission = "0600"
+}
+
 # 9. Azure Linux Virtual Machine (Ubuntu 22.04 LTS)
 resource "azurerm_linux_virtual_machine" "devops_vm" {
   name                  = var.vm_name

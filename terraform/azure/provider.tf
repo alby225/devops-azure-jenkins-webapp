@@ -9,13 +9,14 @@ terraform {
       source  = "hashicorp/tls"
       version = "~> 4.0"
     }
+    local = {
+      source  = "hashicorp/local"
+      version = "~> 2.4"
+    }
   }
 }
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
-
-  # Credentials can be supplied via Azure CLI (az login) or Environment Variables:
-  # ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_SUBSCRIPTION_ID, ARM_TENANT_ID
 }
