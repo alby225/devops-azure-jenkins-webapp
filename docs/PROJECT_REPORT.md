@@ -409,7 +409,7 @@ This project successfully demonstrates a modern, end-to-end DevOps automation pi
 
 ### 9. REFERENCES & REPOSITORY DETAILS
 
-- **GitHub Repository URL:** `https://github.com/[your-username]/devops-azure-jenkins-webapp`
+- **GitHub Repository URL:** `https://github.com/alby225/devops-azure-jenkins-webapp`
 - **Terraform Documentation:** https://developer.hashicorp.com/terraform/docs
 - **Azure Provider for Terraform:** https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
 - **Jenkins Pipeline Documentation:** https://www.jenkins.io/doc/book/pipeline/
